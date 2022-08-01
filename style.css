@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+body {
+    background-color: grey;
+}
+
+#slider {
+    width: 500px;
+    height: 40px;
+    background: linear-gradient(to right,
+            #FF0000,
+            #FF9900,
+            #D0DE21,
+            #4FDC4A,
+            #3FDAD8,
+            #2FC9E2,
+            #1C7FEE,
+            #5F15F2,
+            #B80CF8);
+}
+
+#results {
+    overflow: hidden;
+}
+
+#results div {
+    height: 40px;
+    width: 40px;
+    float: left;
+    margin-right: 5px;
+}
+
+#reference {
+    width: 500px;
+}
