@@ -6,6 +6,7 @@ window.addEventListener("load", function () {
     document.getElementById("reset").addEventListener("click", reset);
     document.getElementById("remove").addEventListener("click", removeColorPicker);
     document.getElementById("rainbow").addEventListener("click", rainbowGrad);
+    document.getElementById("random").addEventListener("click", random);
     document.getElementById("referencePush").addEventListener("click", function () {
         applyTextReference()
     });
@@ -95,6 +96,32 @@ function reset() {
     setTextReference("#FF0000, #FFFFFF")
     document.getElementById("number").value = 9
     changeNumber()
+}
+
+function random() {
+    removeAllColorPickers()
+    colorStr = createRandomColors()
+    colorArr = colorStr.split(", ")
+    console.log(colorArr)
+    colorArr.forEach(ele => addColorPicker(ele))
+    setGradient()
+    setTextReference(colorStr)
+    document.getElementById("number").value = 9
+    changeNumber()
+
+}
+
+function createRandomColors() {
+    var clrStr = ""
+    for (let i = 0; i < rnum(2, 9); i++) {
+        var rgba = [rnum(), rnum(), rnum()]
+        clrStr = clrStr.concat(toHex(rgba), ", ")
+    }
+    return clrStr.slice(0, -2).toUpperCase();
+}
+
+function rnum(min = 0, max = 255) {
+    return Math.floor((Math.random() * max) + min);
 }
 
 function setTextReference(colorArrText) {
