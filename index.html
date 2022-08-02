@@ -10,26 +10,35 @@
 </head>
 
 <body>
-    <div id="colors">
-        <input type="button" value="add" id="add" />
-        <input type="button" value="remove" id="remove" />
-        <input type="button" value="reset" id="reset" />
-        <input type="button" value="rainbow" id="rainbow" />
-        <input type="button" value="chohwi" id="chohwi" />
+    <div class="toplevel">
+        <div id="colors">
+            <input type="button" value="add" id="add" />
+            <input type="button" value="remove" id="remove" />
+            <input type="button" value="reset" id="reset" />
+            <input type="button" value="rainbow" id="rainbow" />
+            <input type="button" value="chohwi" id="chohwi" />
+        </div>
+    </div>
+    <div class="toplevel">
         <div id="container">&nbsp;</div>
     </div>
-    <div>
+    <div class="toplevel">
         <input type="text" id="reference">
         <input type="button" value="submit reference" id="referencePush" />
     </div>
     <div id="slider"></div>
-    <div>
-        <b>포인트 보상 개수:</b>
-        <input type="number" min="1" , id="number">
+    <div class="toplevel">
+        <b style="margin-right:0;">포인트 보상 개수:</b>
+        <input style="margin-left:0;" type="number" min="1" , id="number">
     </div>
-    <div id="results">
+    <div id="result_container">
+        <div id="dark_reference">
+        </div>
+        <div id="light_reference">
+        </div>
+    </div>
 
-    </div>
+
     <script src="script.js"></script>
 </body>
 

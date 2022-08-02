@@ -84,7 +84,6 @@ function rainbowGrad() {
     slider.style.background = listOfHexToColor(rainbowColors);
     removeAllColorPickers()
     listOfHexToColorPicker(rainbowColors)
-    console.log(rainbowColors)
     setTextReference(rainbowColors.join(", "))
 }
 
@@ -94,11 +93,13 @@ function reset() {
     addColorPicker()
     setGradient()
     setTextReference("#FF0000, #FFFFFF")
+    document.getElementById("number").value = 9
+    changeNumber()
 }
 
 function setTextReference(colorArrText) {
     var reference = document.getElementById("reference")
-    reference.value = colorArrText;
+    reference.value = colorArrText.toUpperCase();
 }
 
 function applyTextReference() {
@@ -114,10 +115,9 @@ function colorPickersToText() {
     var reference = document.getElementById("reference")
     var container = document.getElementById("container")
     var colors = [].slice.call(container.children)
-    console.log(colors)
     var style_pre = ""
     colors.forEach(element => style_pre = style_pre.concat(element.value, ", "))
-    reference.value = style_pre.slice(0, -2);
+    reference.value = style_pre.slice(0, -2).toUpperCase();
 }
 
 function changeNumber() {
@@ -136,7 +136,8 @@ function changeNumber() {
     for (var ind = 0; ind < num; ind++) {
         gradResult.push(gradientSearch(colorArr, colorSpread, ind * increment))
     }
-    createResults(gradResult)
+    createResultsDark(gradResult)
+    createResultsLight(gradResult)
 }
 
 
@@ -160,20 +161,38 @@ function gradientSearch(colorArr, colorSpread, position) {
     return rgb;
 }
 
-function createResults(gradResult) {
-    var results = document.getElementById("results")
+function createResultsDark(gradResult) {
+    var results = document.getElementById("dark_reference")
+    results.innerHTML = '';
+    gradResult.forEach(ele => createResult(ele, results))
+}
+
+function createResultsLight(gradResult) {
+    var results = document.getElementById("light_reference")
     results.innerHTML = '';
     gradResult.forEach(ele => createResult(ele, results))
 }
 
 function createResult(color, results) {
-    var style = "rgb(" + color[0] + ", " + color[1] + ", " + color[2] + ")"
     var res = document.createElement("div");
-    res.style.background = style
-    hexString = toHex(color)
-    navigator.clipboard.writeText(hexString);
-    //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_copy_clipboard
+    var style_txt = "background-color: " + toHex(color) + ";"
+    res.setAttribute("class", "result")
+    res.setAttribute("style", style_txt)
+    res.innerHTML = toHex(color).toUpperCase()
+    res.addEventListener("click", function () {
+        CopyToClipboard(res)
+    })
     results.appendChild(res)
+}
+
+function CopyToClipboard(element) {
+    navigator.clipboard.writeText(element.innerHTML);
+    ref = element.innerHTML
+    element.innerHTML = "COPIED"
+    setTimeout(() => {
+        element.innerHTML = ref;
+    }, "500")
+
 }
 
 function toHex(color) {
